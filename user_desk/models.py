@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Create your models here.
+# Class for Users
 class User(models.Model):
     full_name = models.TextField()
     position = models.TextField(blank=True)
@@ -10,6 +10,7 @@ class User(models.Model):
         return self.full_name + ' ' + self.position
 
 
+# Class for Tasks
 class Task(models.Model):
     task_name = models.CharField(max_length=150)
     description = models.TextField(blank=True)

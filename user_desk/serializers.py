@@ -2,6 +2,7 @@ from rest_framework import serializers
 from user_desk.models import User, Task
 
 
+# Serializer for Users
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -11,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
                   )
 
 
+# Serializer for Tasks
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
@@ -23,6 +25,7 @@ class TaskSerializer(serializers.ModelSerializer):
                   )
 
 
+# Serializer for Tasks on /users/<id>/tasks page
 class TaskWithRelationsSerializer(TaskSerializer):
     class Meta(TaskSerializer.Meta):
         depth = 1

@@ -1,19 +1,16 @@
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status, generics
+from rest_framework import generics
 from rest_framework.views import APIView
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from user_desk.models import User, Task
 from user_desk.serializers import UserSerializer, TaskSerializer, TaskWithRelationsSerializer
-from django.shortcuts import render
 
 
+# View for Users lists
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    # Allow filtering by position
     def get_queryset(self):
         users = User.objects.all()
         position = self.request.query_params.get('position', None)
@@ -22,15 +19,18 @@ class UserList(generics.ListCreateAPIView):
         return users
 
 
+# View for Users instance
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
+# View for Tasks lists
 class TaskList(generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
+    # Allow filtering by name
     def get_queryset(self):
         tasks = Task.objects.all()
         task_name = self.request.query_params.get('task_name', None)
@@ -39,6 +39,7 @@ class TaskList(generics.ListCreateAPIView):
         return tasks
 
 
+# View for Task instance
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -56,6 +57,7 @@ class UserTaskList(generics.ListAPIView):
         return tasks
 
 
+# Another way to create class-based view, without generics
 class TaskExecutorsList(APIView):
     """
     List all user on that task.
