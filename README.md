@@ -1,4 +1,4 @@
-#Simple REST API for picasel.agency
+# Simple REST API for picasel.agency
 
 ### Тестовое задание
 Необходимо разработать REST API для проекта на Django Rest, содержащего две основные сущности — пользователи и задачи. 
